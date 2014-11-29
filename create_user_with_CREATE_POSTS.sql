@@ -15,20 +15,3 @@ insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audi
   select BRANCH_ID, 1021, @createPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure)
   select BRANCH_ID, 1022, @createPosts_group_sid_id, @CREATE_POSTS_MASK, 1, 0, 0 from BRANCHES;
-  
-  
-insert ignore into GROUPS (UUID, `NAME`) VALUES ((SELECT UUID() FROM dual), 'createStickedPosts');
-SET @createStickedPosts_group_id := (select GROUP_ID from GROUPS where `NAME`='createStickedPosts');
-SET @createStickedPosts_group_sid := concat('usergroup:',@createStickedPosts_group_id);
-insert ignore into USERS (UUID, USERNAME, ENCODED_USERNAME, EMAIL, PASSWORD, ROLE, SALT, ENABLED) VALUES
-  ((SELECT UUID() FROM dual), 'sticked_post_creator', 'sticked_post_creator', 'sticked_post_creator@jtalks.org', MD5('qwerty'), 'USER_ROLE', '',true);
-insert ignore into JC_USER_DETAILS (USER_ID, REGISTRATION_DATE, POST_COUNT) values
-  ((select ID from USERS where USERNAME = 'sticked_post_creator'), NOW(), 0);
-insert ignore into GROUP_USER_REF select @createStickedPosts_group_id, ID from USERS where USERNAME = 'sticked_post_creator';
-insert into acl_sid(principal, sid) values (0, @createStickedPosts_group_sid);
-SET @createStickedPosts_group_sid_id := (select id from acl_sid where sid=@createStickedPosts_group_sid);
-set @createStickedPosts_group_object_identity=@branches_count + 5;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure)
-  select BRANCH_ID, 1023, @createStickedPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure)
-  select BRANCH_ID, 1024, @createStickedPosts_group_sid_id, @CREATE_STICKED_TOPICS_MASK, 1, 0, 0 from BRANCHES;
