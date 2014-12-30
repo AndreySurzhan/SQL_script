@@ -18,7 +18,6 @@ insert ignore into GROUPS (UUID, `NAME`) VALUES
 	((SELECT UUID() FROM dual), 'createPosts'),
 	((SELECT UUID() FROM dual), 'createStickedPosts'),
 	((SELECT UUID() FROM dual), 'createAnnouncements'),
---	((SELECT UUID() FROM dual), 'createQuestions'),
 	((SELECT UUID() FROM dual), 'editOwnPosts'),
 	((SELECT UUID() FROM dual), 'editOtherPosts'),
 	((SELECT UUID() FROM dual), 'deleteOwnPosts'),
@@ -35,7 +34,6 @@ SET @moderator_group_id := (select GROUP_ID from GROUPS where `NAME`='Moderators
 SET @createPosts_group_id = (select GROUP_ID from GROUPS where `NAME`='createPosts');
 SET @createStickedPosts_group_id = (select GROUP_ID from GROUPS where `NAME`='createStickedPosts');
 SET @createAnnouncements_group_id = (select GROUP_ID from GROUPS where `NAME`='createAnnouncements');
---SET @createQuestions_group_id = (select GROUP_ID from GROUPS where `NAME`='createQuestions');
 SET @editOwnPosts_group_id = (select GROUP_ID from GROUPS where `NAME`='editOwnPosts');
 SET @editOtherPosts_group_id = (select GROUP_ID from GROUPS where `NAME`='editOtherPosts');
 SET @deleteOwnPosts_group_id = (select GROUP_ID from GROUPS where `NAME`='deleteOwnPosts');
@@ -52,7 +50,6 @@ SET @moderator_group_sid := concat('usergroup:',@moderator_group_id);
 SET @createPosts_group_sid = concat('usergroup:',@createPosts_group_id);
 SET @createStickedPosts_group_sid = concat('usergroup:',@createStickedPosts_group_id);
 SET @createAnnouncements_group_sid = concat('usergroup:',@createAnnouncements_group_id);
---SET @createQuestions_group_sid = concat('usergroup:',@createQuestions_group_id);
 SET @editOwnPosts_group_sid = concat('usergroup:',@editOwnPosts_group_id);
 SET @editOtherPosts_group_sid = concat('usergroup:',@editOtherPosts_group_id);
 SET @deleteOwnPosts_group_sid = concat('usergroup:',@deleteOwnPosts_group_id);
@@ -73,7 +70,6 @@ insert ignore into USERS (UUID, USERNAME, ENCODED_USERNAME, EMAIL, PASSWORD, ROL
 	((SELECT UUID() FROM dual), 'post_creator', 'post_creator', 'post_creator@jtalks.org', MD5('qwerty'), 'USER_ROLE', '',true),
 	((SELECT UUID() FROM dual), 'sticked_post_creator', 'sticked_post_creator', 'sticked_post_creator@jtalks.org', MD5('qwerty'), 'USER_ROLE', '',true),
 	((SELECT UUID() FROM dual), 'announcement_creator', 'announcement_creator', 'announcement_creator@jtalks.org', MD5('qwerty'), 'USER_ROLE', '',true),
---	((SELECT UUID() FROM dual), 'question_creator', 'question_creator', 'question_creator@jtalks.org', MD5('qwerty'), 'USER_ROLE', '',true),
 	((SELECT UUID() FROM dual), 'ownpost_editor', 'ownpost_editor', 'ownpost_editor@jtalks.org', MD5('qwerty'), 'USER_ROLE', '',true),
 	((SELECT UUID() FROM dual), 'otherpost_editor', 'otherpost_editor', 'otherpost_editor@jtalks.org', MD5('qwerty'), 'USER_ROLE', '',true),
 	((SELECT UUID() FROM dual), 'ownpost_remover', 'ownpost_remover', 'ownpost_remover@jtalks.org', MD5('qwerty'), 'USER_ROLE', '',true),
@@ -90,7 +86,6 @@ insert ignore into JC_USER_DETAILS (USER_ID, REGISTRATION_DATE, POST_COUNT) valu
 	((select ID from USERS where USERNAME = 'post_creator'), NOW(), 0),
 	((select ID from USERS where USERNAME = 'sticked_post_creator'), NOW(), 0),
 	((select ID from USERS where USERNAME = 'announcement_creator'), NOW(), 0),
---	((select ID from USERS where USERNAME = 'question_creator'), NOW(), 0),
 	((select ID from USERS where USERNAME = 'ownpost_editor'), NOW(), 0),
 	((select ID from USERS where USERNAME = 'otherpost_editor'), NOW(), 0),
 	((select ID from USERS where USERNAME = 'ownpost_remover'), NOW(), 0),
@@ -110,7 +105,6 @@ insert ignore into GROUP_USER_REF select @banned_group_id, ID from USERS where U
 insert ignore into GROUP_USER_REF select @createPosts_group_id, ID from USERS where USERNAME = 'post_creator';
 insert ignore into GROUP_USER_REF select @createStickedPosts_group_id, ID from USERS where USERNAME = 'sticked_post_creator';
 insert ignore into GROUP_USER_REF select @createAnnouncements_group_id, ID from USERS where USERNAME = 'announcement_creator';
---insert ignore into GROUP_USER_REF select @createQuestions_group_id, ID from USERS where USERNAME = 'question_creator';
 insert ignore into GROUP_USER_REF select @editOwnPosts_group_id, ID from USERS where USERNAME = 'ownpost_editor';
 insert ignore into GROUP_USER_REF select @editOtherPosts_group_id, ID from USERS where USERNAME = 'otherpost_editor';
 insert ignore into GROUP_USER_REF select @deleteOwnPosts_group_id, ID from USERS where USERNAME = 'ownpost_remover';
@@ -129,7 +123,6 @@ insert into acl_sid(principal, sid) values (0, @moderator_group_sid);
 insert into acl_sid(principal, sid) values (0, @createPosts_group_sid);
 insert into acl_sid(principal, sid) values (0, @createStickedPosts_group_sid);
 insert into acl_sid(principal, sid) values (0, @createAnnouncements_group_sid);
---insert into acl_sid(principal, sid) values (0, @createQuestions_group_sid);
 insert into acl_sid(principal, sid) values (0, @editOwnPosts_group_sid);
 insert into acl_sid(principal, sid) values (0, @editOtherPosts_group_sid);
 insert into acl_sid(principal, sid) values (0, @deleteOwnPosts_group_sid);
@@ -147,7 +140,6 @@ SET @anonymous_sid_id := (select id from acl_sid where sid='user:anonymousUser')
 SET @createPosts_group_sid_id = (select id from acl_sid where sid=@createPosts_group_sid);
 SET @createStickedPosts_group_sid_id = (select id from acl_sid where sid=@createStickedPosts_group_sid);
 SET @createAnnouncements_group_sid_id = (select id from acl_sid where sid=@createAnnouncements_group_sid);
---SET @createQuestions_group_sid_id := (select id from acl_sid where sid=@createQuestions_group_sid);
 SET @editOwnPosts_group_sid_id = (select id from acl_sid where sid=@editOwnPosts_group_sid);
 SET @editOtherPosts_group_sid_id = (select id from acl_sid where sid=@editOtherPosts_group_sid);
 SET @deleteOwnPosts_group_sid_id = (select id from acl_sid where sid=@deleteOwnPosts_group_sid);
@@ -173,7 +165,6 @@ SET @EDIT_OWN_POSTS_MASK := 133;
 SET @EDIT_OTHERS_POSTS_MASK := 17;
 SET @CREATE_ANNOUNCEMENTS_MASK := 18;
 SET @CREATE_STICKED_TOPICS_MASK := 19;
---SET @CREATE_QUESTIONS_MASK = 24; --not existing permission!!
 SET @CREATE_CODE_REVIEW_MASK := 21;
 SET @LEAVE_COMMENTS_IN_CODE_REVIEW_MASK := 22;
 
@@ -191,15 +182,14 @@ set @banned_group_object_identity=@branches_count + 3;
 set @createPosts_group_object_identity=@branches_count + 5;
 set @createStickedPosts_group_object_identity=@branches_count + 6;
 set @createAnnouncements_group_object_identity=@branches_count + 7;
---set @createQuestions_group_object_identity=@branches_count + 8;
-set @editOwnPosts_group_object_identity=@branches_count + 9;
-set @editOtherPosts_group_object_identity=@branches_count + 10;
-set @deleteOwnPosts_group_object_identity=@branches_count + 12;
+set @editOwnPosts_group_object_identity=@branches_count + 8;
+set @editOtherPosts_group_object_identity=@branches_count + 9;
+set @deleteOwnPosts_group_object_identity=@branches_count + 10;
 set @deleteOthersPosts_group_object_identity=@branches_count + 11;
-set @moveTopics_group_object_identity=@branches_count + 13;
-set @closeTopics_group_object_identity=@branches_count + 14;
-set @createCodeReview_group_object_identity=@branches_count + 15;
-set @leaveCommentsInCodeReview_group_object_identity=@branches_count + 16;
+set @moveTopics_group_object_identity=@branches_count + 12;
+set @closeTopics_group_object_identity=@branches_count + 13;
+set @createCodeReview_group_object_identity=@branches_count + 14;
+set @leaveCommentsInCodeReview_group_object_identity=@branches_count + 15;
 
 insert ignore into acl_object_identity values
   (@registered_group_object_identity, @group_acl_class, @registered_group_id, NULL, 1, 1),
@@ -208,7 +198,6 @@ insert ignore into acl_object_identity values
   (@createPosts_group_object_identity, @group_acl_class, @createPosts_group_id, NULL, 1, 1),
   (@createStickedPosts_group_object_identity, @group_acl_class, @createStickedPosts_group_id, NULL, 1, 1),
   (@createAnnouncements_group_object_identity, @group_acl_class, @createAnnouncements_group_id, NULL, 1, 1),
- -- (@createQuestions_group_object_identity, @group_acl_class, @createQuestions_group_id, NULL, 1, 1),
   (@editOwnPosts_group_object_identity, @group_acl_class, @editOwnPosts_group_id, NULL, 1, 1),
   (@editOtherPosts_group_object_identity, @group_acl_class, @editOtherPosts_group_id, NULL, 1, 1),
   (@deleteOwnPosts_group_object_identity, @group_acl_class, @deleteOwnPosts_group_id, NULL, 1, 1),
@@ -277,11 +266,6 @@ insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audi
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1027, @createAnnouncements_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1028, @createAnnouncements_group_sid_id, @CREATE_POSTS_MASK, 1, 0, 0 from BRANCHES;
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1029, @createAnnouncements_group_sid_id, @CREATE_ANNOUNCEMENTS_MASK, 1, 0, 0 from BRANCHES;
-
--- setting permissions for createQuestions users on all branches
--- insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1030, @createQuestions_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
--- insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1031, @createQuestions_group_sid_id, @CREATE_POSTS_MASK, 1, 0, 0 from BRANCHES;
--- insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1032, @createQuestions_group_sid_id, @CREATE_QUESTIONS_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for editOwnPosts users on all branches
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1033, @editOwnPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
