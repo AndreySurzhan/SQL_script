@@ -60,7 +60,69 @@ SET @createCodeReview_group_sid = concat('usergroup:',@createCodeReview_group_id
 SET @leaveCommentsInCodeReview_group_sid = concat('usergroup:',@leaveCommentsInCodeReview_group_id);
 -- GROUPS END
 
--- ****USERS CREATION BEGIN****
+-- BRANCHES BEGIN
+insert ignore into BRANCHES (BRANCH_ID, UUID, `NAME`, DESCRIPTION, POSITION, SECTION_ID, MODERATORS_GROUP_ID) VALUES
+  (1, UUID(), 'Curling', 'Brooms and stones', 0, 1, 1),
+  (2, UUID(), 'Cricet', 'Balls and bats', 1, 1 ,1),
+  (3, UUID(), 'Field hockey', 'Sticks and balls on the grass', 2, 1 ,1),
+  (4, UUID(), 'Korfball', 'It is NOT basketball!!', 3, 1 ,1),
+  (5, UUID(), 'Sepak takraw', 'Rattan balls,', 4, 1 ,1),
+  
+  (6, UUID(), 'Bicycle', 'Two wheels', 0, 2, 1),
+  (7, UUID(), 'Rickshaw', '', 1, 2 ,1),
+  (8, UUID(), 'Horse', 'Still actual', 2, 2 ,1),
+  (9, UUID(), 'On foot', 'Maybe some classic?', 3, 2 ,1),
+  (10, UUID(), 'UFO', 'What about some extreme', 4, 2 ,1),
+
+  (11, UUID(), 'Europe', 'Classic trips', 0, 3, 1),
+  (12, UUID(), 'Asia', 'Most populated', 1, 3 ,1),
+  (13, UUID(), 'America', 'Other hemisphere', 2, 3 ,1),
+  (14, UUID(), 'Africa', 'Too hot?', 3, 3 ,1),
+  (15, UUID(), 'Australia', 'Something very interesting', 4, 3 ,1),
+  
+  (16, UUID(), 'Classic', 'Checked by ages', 0, 4, 1),
+  (17, UUID(), 'Rock', 'Something heavier?', 1, 4, 1),
+  (18, UUID(), 'Electronic', '', 2, 4 ,1),
+  (19, UUID(), 'Pop', 'La-la', 3, 4 ,1),
+  (20, UUID(), 'Rap', 'Yo!', 4, 4 ,1),
+  
+  (21, UUID(), 'Ancient', 'Rome, Greece', 0, 5, 1),
+  (22, UUID(), 'Middle Ages', 'Europe', 1, 5 ,1),
+  (23, UUID(), 'Renaissance', 'Still Europe', 2, 5 ,1),
+  (24, UUID(), 'Modern', 'All Earth', 3, 5 ,1),
+  (25, UUID(), 'Future', 'Go ahead all over the world', 4, 5 ,1),
+  
+  (26, UUID(), 'Sci-fi', 'What about something unbelievable?', 0, 6, 1),
+  (27, UUID(), 'Adventures', 'Breathtaking books', 1, 6 ,1),
+  (28, UUID(), 'Fairytales', 'Not only for kids', 2, 6 ,1),
+  (29, UUID(), 'Realism', 'All about our life', 3, 6 ,1),
+  (30, UUID(), 'Comedy', 'LOL', 4, 6 ,1),
+  
+  (31, UUID(), 'TV shows', 'Funny and useful', 0, 7, 1),
+  (32, UUID(), 'News', 'From north to south', 1, 7 ,1),
+  (33, UUID(), 'Cartoon', 'Kids time', 2, 7 ,1),
+  (34, UUID(), 'Discovery', 'All Earth', 3, 7 ,1),
+  (35, UUID(), 'Advertisement', 'Part of the TV', 4, 7 ,1),
+  
+  (36, UUID(), 'Hard', 'Components', 0, 8, 1),
+  (37, UUID(), 'Soft', 'Applications', 1, 8 ,1),
+  (38, UUID(), 'Programming', 'Development', 2, 8 ,1),
+  (39, UUID(), 'Network', 'World wide web', 3, 8 ,1),
+  (40, UUID(), 'Electronics', 'Devices', 4, 8 ,1),
+  
+  (41, UUID(), 'Philosophy', 'Wisdom', 0, 9, 1),
+  (42, UUID(), 'Sociology', 'Human behaviour', 1, 9 ,1),
+  (43, UUID(), 'Psychology', 'Human motives', 2, 9 ,1),
+  (44, UUID(), 'Education', 'Evolution', 3, 9 ,1),
+  (45, UUID(), 'Religion', 'Human faith', 4, 9 ,1),
+  
+  (46, UUID(), 'Theatre', 'Performances', 0, 10, 1),
+  (47, UUID(), 'Cinema', 'New blockbusters', 1, 10 ,1),
+  (48, UUID(), 'Exhibitions', 'Art', 2, 10 ,1),
+  (49, UUID(), 'Competitions', 'Some sport', 3, 10 ,1);
+  -- BRANCHES END
+  
+  -- ****USERS CREATION BEGIN****
 -- Creates a default users with admin/admin, registered/registered, moderator/moderator, banned/banned credentials, individual permissions to be able to log in without manual registration
 insert ignore into USERS (UUID, USERNAME, ENCODED_USERNAME, EMAIL, PASSWORD, ROLE, SALT, ENABLED) VALUES
 	((SELECT UUID() FROM dual), 'admin', 'admin', 'admin@jtalks.org', MD5('admin'), 'USER_ROLE', '',true),
