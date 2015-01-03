@@ -266,7 +266,7 @@ insert ignore into acl_object_identity values
   (@deleteOthersPosts_group_object_identity, @group_acl_class, @deleteOthersPosts_group_id, NULL, 1, 1),
   (@moveTopics_group_object_identity, @group_acl_class, @moveTopics_group_id, NULL, 1, 1),
   (@closeTopics_group_object_identity, @group_acl_class, @closeTopics_group_id, NULL, 1, 1),
-  (@createCodeReview_group_object_identity, 2, @createCodeReview_group_id, NULL, 1, 1),
+  (@createCodeReview_group_object_identity, @group_acl_class, @createCodeReview_group_id, NULL, 1, 1),
   (@leaveCommentsInCodeReview_group_object_identity, @group_acl_class, @leaveCommentsInCodeReview_group_id, NULL, 1, 1),
   (53, @component_acl_class, @forum_component_id, NULL, 1, 1);
 
@@ -381,15 +381,3 @@ insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audi
 -- admin permissions for the component
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure)
   values (@admin_group_object_identity, 1000, @admin_group_sid_id, @ADMIN_MASK, 1, 0, 0);
-  
-set @registered_group_object_identity=@branches_count + 1;
-set @admin_group_object_identity=@branches_count + 2;
-set @banned_group_object_identity=@branches_count + 3; 
-
-SET @registered_group_id := (select GROUP_ID from GROUPS where `NAME`='Registered Users');
-SET @registered_group_sid := concat('usergroup:',@registered_group_id);
-insert ignore into GROUP_USER_REF select @registered_group_id, ID from USERS;
-SET @registered_group_sid_id := (select id from acl_sid where sid=@registered_group_sid);
-set @registered_group_object_identity=@branches_count + 1;
-insert ignore into acl_object_identity values
-  (@registered_group_object_identity, @group_acl_class, @registered_group_id, NULL, 1, 1);
