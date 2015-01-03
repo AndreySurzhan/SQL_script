@@ -389,7 +389,6 @@ set @banned_group_object_identity=@branches_count + 3;
 SET @registered_group_id := (select GROUP_ID from GROUPS where `NAME`='Registered Users');
 SET @registered_group_sid := concat('usergroup:',@registered_group_id);
 insert ignore into GROUP_USER_REF select @registered_group_id, ID from USERS;
-insert into acl_sid(principal, sid) values (0, @moderator_group_sid);
 SET @registered_group_sid_id := (select id from acl_sid where sid=@registered_group_sid);
 set @registered_group_object_identity=@branches_count + 1;
 insert ignore into acl_object_identity values
