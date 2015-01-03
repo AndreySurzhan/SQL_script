@@ -330,39 +330,39 @@ insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audi
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1029, @createAnnouncements_group_sid_id, @CREATE_ANNOUNCEMENTS_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for editOwnPosts users on all branches
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1033, @editOwnPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1034, @editOwnPosts_group_sid_id, @EDIT_OWN_POSTS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1030, @editOwnPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1031, @editOwnPosts_group_sid_id, @CREATE_POSTS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1032, @editOwnPosts_group_sid_id, @EDIT_OWN_POSTS_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for editOtherPosts users on all branches
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1035, @editOtherPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1036, @editOtherPosts_group_sid_id, @EDIT_OWN_POSTS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1037, @editOtherPosts_group_sid_id, @EDIT_OTHERS_POSTS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1033, @editOtherPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1034, @editOtherPosts_group_sid_id, @EDIT_OTHERS_POSTS_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for deleteOwnPosts users on all branches
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1041, @deleteOwnPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1042, @deleteOwnPosts_group_sid_id, @DELETE_OWN_POSTS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1035, @deleteOwnPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1036, @deleteOwnPosts_group_sid_id, @CREATE_POSTS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1037, @deleteOwnPosts_group_sid_id, @DELETE_OWN_POSTS_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for deleteOtherPosts users on all branches
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1038, @deleteOthersPosts_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1039, @deleteOthersPosts_group_sid_id, @DELETE_OWN_POSTS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1039, @deleteOthersPosts_group_sid_id, @CREATE_POSTS_MASK, 1, 0, 0 from BRANCHES;
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1040, @deleteOthersPosts_group_sid_id, @DELETE_OTHERS_POSTS_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for moveTopics users on all branches
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1043, @moveTopics_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1044, @moveTopics_group_sid_id, @MOVE_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1041, @moveTopics_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1042, @moveTopics_group_sid_id, @MOVE_TOPICS_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for closeTopics users on all branches
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1045, @closeTopics_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1046, @closeTopics_group_sid_id, @CLOSE_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1043, @closeTopics_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1044, @closeTopics_group_sid_id, @CLOSE_TOPICS_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for createCodeReview users on all branches
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1047, @createCodeReview_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1048, @createCodeReview_group_sid_id, @CREATE_POSTS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1049, @createCodeReview_group_sid_id, @CREATE_CODE_REVIEW_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1045, @createCodeReview_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1046, @createCodeReview_group_sid_id, @CREATE_CODE_REVIEW_MASK, 1, 0, 0 from BRANCHES;
 
 -- setting permissions for leaveCommentsInCodeReview users on all branches
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1050, @leaveCommentsInCodeReview_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
-insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1051, @leaveCommentsInCodeReview_group_sid_id, @LEAVE_COMMENTS_IN_CODE_REVIEW_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1047, @leaveCommentsInCodeReview_group_sid_id, @VIEW_TOPICS_MASK, 1, 0, 0 from BRANCHES;
+insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) select BRANCH_ID, 1048, @leaveCommentsInCodeReview_group_sid_id, @LEAVE_COMMENTS_IN_CODE_REVIEW_MASK, 1, 0, 0 from BRANCHES;
   
 -- personal permissions
 insert into acl_entry (acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure)
