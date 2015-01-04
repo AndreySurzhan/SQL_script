@@ -234,7 +234,8 @@ SET @ADMIN_MASK := 16;
 -- PERMISSIONS END
 
 insert ignore into acl_object_identity (object_id_class, object_id_identity, parent_object, owner_sid, entries_inheriting) VALUES
- (SELECT @branch_acl_class, BranchTable.BRANCH_ID, NULL, 1, 1 FROM (SELECT BRANCH_ID FROM BRANCHES) BranchTable);
+	(SELECT @branch_acl_class, BranchTable.BRANCH_ID, NULL, 1, 1 
+	FROM (SELECT BRANCH_ID FROM BRANCHES) BranchTable);
 
 set @branches_count = (SELECT COUNT(*) FROM BRANCHES);
 set @registered_group_object_identity=@branches_count + 1;
